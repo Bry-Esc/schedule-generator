@@ -29,12 +29,17 @@
                             <div class="form-group">
                                 {{-- <label>Email</label> --}}
                                 <label>Department</label>
-                                <input type="text" name="email" class="form-control">
+                                <div class="select2-wrapper">
+                                    <select class="form-control select2">
+                                        <option value="">Select Department</option>
+                                        <option value="">COI</option>
+                                        <option value="">COE</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Courses</label>
-
                                 <div class="select2-wrapper">
                                     <select id="courses-select" name="course_ids[]" class="form-control select2" multiple>
                                         <option value="">Select courses</option>
@@ -48,7 +53,13 @@
                             <div class="form-group">
                                 {{-- <label>Email</label> --}}
                                 <label>Employee Status</label>
-                                <input type="text" name="email" class="form-control">
+                                <div class="select2-wrapper">
+                                    <select class="form-control select2">
+                                        <option value="">Select status</option>
+                                        <option value="">Full Time</option>
+                                        <option value="">Part Time</option>
+                                    </select>
+                                </div>
                             </div>
 
 

@@ -5,7 +5,7 @@
             <thead>
                 <tr class="table-head">
                     <th style="width: 20%">Name</th>
-                    <th style="width: 20%">Email</th>
+                    <th style="width: 20%">Department</th>
                     <th style="width: 30%">Courses Taught</th>
                     <th style="width: 20%">Unavailable Periods</th>
                     <th>Actions</th>

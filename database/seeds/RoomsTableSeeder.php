@@ -13,32 +13,32 @@ class RoomsTableSeeder extends Seeder
     {
         DB::table('rooms')->insert([
             [
-                'name' => 'SF 19',
-                'capacity' => 180
+                'name' => 'CL 5',
+                'capacity' => 20
             ],
             [
-                'name' => 'SF 20',
-                'capacity' => 180
+                'name' => 'CL 6',
+                'capacity' => 20
             ],
             [
-                'name' => 'FF 1',
-                'capacity' => 200
+                'name' => 'CL 7',
+                'capacity' => 20
             ],
             [
-                'name' => 'SF 1',
-                'capacity' => 200
+                'name' => 'CL 8',
+                'capacity' => 20
             ],
             [
-                'name' => 'SF 8',
-                'capacity' => 150
+                'name' => 'CL 9',
+                'capacity' => 20
             ],
             [
-                'name' => 'SF 7',
-                'capacity' => 120
+                'name' => 'CL 10',
+                'capacity' => 20
             ],
             [
-                'name' => 'FF 24',
-                'capacity' => 120
+                'name' => 'CL 11',
+                'capacity' => 20
             ]
         ]);
     }
