@@ -55,7 +55,7 @@
                                 <label>Employee Status</label>
                                 <div class="select2-wrapper">
                                     <select class="form-control select2">
-                                        <option value="">Select status</option>
+                                        <option value="">Select Status</option>
                                         <option value="">Full Time</option>
                                         <option value="">Part Time</option>
                                     </select>

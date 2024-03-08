@@ -10,7 +10,7 @@
 		@include('partials.styles')
 		@yield('styles')
 
-		<title>Reset Password | Timetable</title>
+		<title>Reset Password</title>
     </head>
 
     <body class="login-page">
@@ -19,7 +19,7 @@
                 <div class="col-xs-12 col-md-4 col-sm-8 col-lg-4 col-md-offset-4 col-sm-offset-2 col-lg-offset-4">
                     <div id="login-form-container">
                         <div class="login-form-header">
-                            <h3 class="text-center">timetable</h3>
+                            <h3 class="text-center">Reset Password</h3>
                         </div>
 
                         <div class="login-form-body">

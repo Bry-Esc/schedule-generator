@@ -1,4 +1,4 @@
-To get started with the application, follow these installation steps:
+How to install:
 
 1. Ensure you have PHP 8.1+ installed.
 

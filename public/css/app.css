@@ -12,8 +12,12 @@
   justify-content: center;
 }
 
+.container {
+  width: 100% !important;
+}
+
 #login-form-container {
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 #activation-form-container {
@@ -38,6 +42,58 @@
   padding: 10px;
 }
 
+/* Login 2 */
+@font-face {
+  font-family: myFirstFont;
+  src: url("../../fonts/OLD.ttf");
+}
+img {
+  display: block;
+  max-height: 85px;
+  width: auto;
+  height: auto;
+  padding-left: 8px;
+}
+.login-page {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.header {
+  /* background-color: #022B61; */
+  background-color: #002e97;
+  padding: 10px;
+}
+.schoolname {
+  font-family: "Times New Roman";
+  font-size: 25pt;
+  color: white;
+}
+.address {
+  color: white;
+}
+.schoolname2 {
+  font-family: "Times New Roman";
+  font-size: 25pt;
+  color: #003147;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: #002e97;
+  padding-top: 5px;
+  z-index: 9999;
+}
+.sis {
+  text-align: right;
+}
+.sis #sisname {
+  font-weight: bold;
+  color: white;
+}
+
 /** Style for buttons */
 .btn-custom {
   background: #002e97;
@@ -45,7 +101,7 @@
 }
 
 .btn-custom:hover {
-  background: #003FD2;
+  background: #020079;
   color: #ffffff;
 }
 
@@ -204,10 +260,6 @@ tbody tr:nth-of-type(odd) {
   background: rgba(229, 76, 16, 0.1);
 }
 
-.paginationn > li > a:hover,
-.pagination > li > span:hover {
-}
-
 .select2-wrapper .select2-container {
   width: 100% !important;
 }
@@ -282,4 +334,13 @@ tbody tr:nth-of-type(odd) {
 
 .input-group-btn .btn {
   font-size: 16px;
+}
+
+/* Section Maintenance */
+.box-header {
+  background: #001a35;
+  color: #ffffff;
+  display: block;
+  padding: 5px;
+  position: relative;
 }

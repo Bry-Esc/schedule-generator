@@ -1,4 +1,8 @@
 <?php
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +25,9 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::resource('rooms', 'RoomsController');
 
 // Routes for section module
-Route::resource('section', 'SectionController');
+Route::get('/section', function() {
+    return view('section.index');
+});
 
 // Routes for courses module
 Route::resource('courses', 'CoursesController');
@@ -47,8 +53,8 @@ Route::post('/users/activate', 'UsersController@activateUser');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Other account related routes
-Route::get('/login', 'UsersController@showLoginPage');
-Route::post('/login', 'UsersController@loginUser');
+// Route::get('/login', 'UsersController@showLoginPage');
+// Route::post('/login', 'UsersController@loginUser');
 Route::get('/request_reset', 'UsersController@showPasswordRequestPage');
 Route::post('/request_reset', 'UsersController@requestPassword');
 Route::get('/reset_password', 'UsersController@showResetPassword');
@@ -59,3 +65,14 @@ Route::get('/logout', function() {
     Auth::logout();
     return redirect('/');
 });
+
+// Newly added routes
+Route::get('/login', 'UsersController@showLoginPage');
+Route::get('/loginMain', function() {
+    return view('auth/loginMain');
+});
+Route::post('/login', 'UsersController@loginUser');
+
+// Search routes
+// Route::get('/search', [SearchController::class, 'search'])->name('web.search');
+Route::get('/find',[UsersController::class, 'find'])->name('web.find');

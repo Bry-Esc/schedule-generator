@@ -11,9 +11,9 @@ class SectionController extends Controller
     {
         
         if ($request->ajax()) {
-            return view('rooms.table', compact('rooms'));
+            return view('section.table', compact('section'));
         }
 
-        return view('rooms.index', compact('rooms'));
+        return view('section.index', compact('section'));
     }
 }

@@ -4,9 +4,10 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="table-head">
-                    <th style="width: 20%">Name</th>
-                    <th style="width: 20%">Department</th>
-                    <th style="width: 30%">Courses Taught</th>
+                    <th style="width: 12%">Name</th>
+                    <th style="width: 10%">Department</th>
+                    <th style="width: 26%">Courses Taught</th>
+                    <th style="width: 20%">Employee Status</th>
                     <th style="width: 20%">Unavailable Periods</th>
                     <th>Actions</th>
                 </tr>
@@ -16,7 +17,9 @@
                 @foreach($professors as $professor)
                 <tr>
                     <td>{{ $professor->name }}</td>
-                    <td>{{ $professor->email }}</td>
+                    <td>
+                        COI
+                    </td>
                     <td>
                         @if (count($professor->courses))
                             <ul>
@@ -27,6 +30,10 @@
                         @else
                             <p>No courses added yet</p>
                         @endif
+                    </td>
+                    <td>
+                        {{-- Employee Status --}}
+                        <p>Full Time</p>
                     </td>
                     <td>
                         @if (count($professor->unavailable_timeslots))

@@ -70,9 +70,9 @@ class ProfessorsController extends Controller
             'name' => 'required'
         ];
 
-        if ($request->has('email') && $request->email) {
-            $rules['email'] = 'email';
-        }
+        // if ($request->has('email') && $request->email) {
+        //     $rules['email'] = 'email';
+        // }
 
         $this->validate($request, $rules);
 

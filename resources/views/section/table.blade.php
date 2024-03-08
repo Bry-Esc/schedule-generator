@@ -1,36 +1,140 @@
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        @if (count($rooms))
-        <table class="table table-bordered">
-            <thead>
-                <tr class="table-head">
-                    <th style="width: 50%">Name</th>
-                    <th style="width: 40%">Capacity</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach($rooms as $room)
-                <tr>
-                    <td>{{ $room->name }}</td>
-                    <td>{{ $room->capacity }}</td>
-                    <td>
-                    <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $room->id }}"><i class="fa fa-pencil"></i></button>
-                    <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $room->id }}"><i class="fa fa-trash-o"></i></button></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-         <div id="pagination">
-            {!!
-                $rooms->render()
-            !!}
+<div class="container-fluid" style="margin-top: 15px;">
+    @if(Session::has('success'))
+    <div class='col-sm-12'>
+        <div class='callout callout-success'>
+            {{Session::get('success')}}
         </div>
-        @else
-        <div class="no-data text-center">
-            <p>No matching data was found</p>
+    </div>
+    @endif
+    
+    @if(Session::has('error'))
+    <div class='col-sm-12'>
+        <div class='callout callout-danger'>
+            {{Session::get('error')}}
         </div>
-        @endif
+    </div>
+    @endif
+    
+    <div class='row'>
+        <div class='col-sm-5'>
+            <div class='box box-solid box-default'>
+                <div class='box-header bg-navy-active'>
+                    <h5 class="box-title">New Section</h5>
+                </div>
+                <div class='box-body'>
+                    <form action="{{url('/admin/section_management/post')}}" method="post">
+                    {{csrf_field()}}
+                    <div class='form-group'>
+                        <label>Academic Program</label>
+                        <select class="select2 form-control" class="select2 form-control"name="program_code" id="program_code" required class='form-control'>
+                            <option>Please Select</option>
+                            {{-- @foreach($programs as $program) --}}
+                            <option>BSIT</option>
+                            <option>BSCS</option>
+                            {{-- @endforeach --}}
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <label>Level</label>
+                        <select name="level" required class='select2 form-control'>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>4th Year</option>
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <label>Section</label>
+                        <input id="section_name" required name="section_name" type="text" class="form-control">
+                    </div>
+                    <div class='form-group'>
+                        <button onclick='return confirm("Clicking the OK button will save the record? Do you wish to continue?")' type='submit' class='btn btn-flat btn-success btn-block'>Save and Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-7'>
+            <div class="box box-default">
+                <div class="box-header">
+                    <h5 class="box-title">List of Created Sections</h5>
+                    {{-- <div class="box-tools pull-right">
+                        <a href="{{url('/admin/section_management/archive')}}" class="btn btn-flat btn-danger"><i class="fa fa-warning"></i> Archive Section</a>
+                    </div> --}}
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width='20%'>Program Code</th>
+                                    <th width='20%'>Level</th>
+                                    <th width='20%'>Section Name</th>
+                                    <th width='20%'>Status</th>
+                                    <th width='20%'>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- @if(!$sections->isEmpty())
+                                @foreach($sections as $section) --}}
+                                <tr>
+                                    <td>CSM</td>
+                                    <td>1</td>
+                                    <td>BSCS</td>
+                                    <td>
+                                        {{-- @if($section->is_active == 1) --}}
+                                        <label class='label label-success'>Active</label>
+                                        {{-- @else --}}
+                                        {{-- <label class='label label-danger'>Inactive</label> --}}
+                                        {{-- @endif --}}
+                                    </td>
+                                    <td>
+                                        {{-- <button data-toggle="modal" data-target="#myModal" onclick="editsection('{{$section->id}}')" title="Edit Record" class="btn btn-flat btn-primary"><i class="fa fa-pencil"></i></button>
+                                        <a href="{{url('/admin/section_management/archive',array($section->id))}}" class="btn btn-flat btn-danger" title="Change to Inactive Status?" onclick="confirm('Do you wish to archive the Record?')"><i class="fa fa-times"></i></a> --}}
+                                        <button data-toggle="modal" data-target="#myModal" onclick="editsection('')" title="Edit Record" class="btn btn-flat btn-primary"><i class="fa fa-pencil"></i></button>
+                                        <a href="{{url('/admin/section_management/archive',array())}}" class="btn btn-flat btn-danger" title="Change to Inactive Status?" onclick="confirm('Do you wish to archive the Record?')"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                {{-- @endforeach
+                                @endif --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div id='displayedit'>
+    </div>
+</div>
+
+@section('footer-script')
+<script src='{{asset('plugins/select2/select2.js')}}'></script>
+<script>
+$('#program_code').on('change',function(){
+    if(this.value!='Please Select'){
+        $('#section_name').val(this.value+'-');
+    }else{
+        $('#section_name').val(' ');
+    }
+})    
+    
+function editsection(section_id){
+    var array = {};
+    array['section_id'] = section_id;
+    $.ajax({
+        type: "GET",
+        url: "/ajax/admin/section_management/edit_section",
+        data: array,
+        success: function(data){
+            $('#displayedit').html(data).fadeIn();
+            $('#myModal').modal('show');
+        }
+    })
+}
+</script>
+@endsection
