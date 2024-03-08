@@ -18,7 +18,7 @@
                     <td>
                         @if($timetable->file_url)
                         <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"
-                           class="btn btn-sm btn-primary print-btn"
+                           class="btn btn-sm btn-primary"
                         data-id="{{ $timetable->id }}"><span class="fa fa-print"></span> PRINT</a>
                         @else
                         N/A

@@ -74,5 +74,5 @@ Route::get('/loginMain', function() {
 Route::post('/login', 'UsersController@loginUser');
 
 // Search routes
-// Route::get('/search', [SearchController::class, 'search'])->name('web.search');
+Route::get('/search', [SearchController::class, 'search'])->name('web.search');
 Route::get('/find',[UsersController::class, 'find'])->name('web.find');

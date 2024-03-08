@@ -74,7 +74,7 @@
         <div class="row">
             <div class="container-fluid header" style >
                 <div class="col-md-1 pull-left">
-                    <img class="logo" src="{{ asset('images/schd-logo-white.png') }}" alt="pcuLogo" />
+                    <img class="logo" src="{{ asset('images/pcuLogo.png') }}" alt="pcuLogo" />
                 </div>
                 <div class="col-md-8"><span class="schoolname">Philippine Christian University Dasma Campus </span>
                     <span class="address"><br>Sampaloc 1, City of Dasmariñas</span>
@@ -82,9 +82,9 @@
                 </div>  
                 {{-- <div class="col-md-3 sis"><span id="sisname">Scheduling System</span></div>
             </div> --}}
-            <div class = "btn1">
+            <div class = "btn1 pull-right">
                 <a href="loginMain" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
-                    Login your Account
+                    Login
                 </a>
             </div>
         </div>
@@ -122,8 +122,8 @@
         </div>
     </div>
         
-    @include('partials.scripts')
-    @yield('scripts')
+    {{-- @include('partials.scripts')
+    @yield('scripts') --}}
 </body>
 
 </html>

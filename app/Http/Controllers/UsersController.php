@@ -29,6 +29,12 @@ class UsersController extends Controller
     }
 
     /**
+     * Find Students
+     *
+     * @param Illuminate\Http\Request $request The HTTP request
+     */
+
+    /**
      * Log in a user
      *
      * @param Illuminate\Http\Request $request The HTTP request
@@ -243,5 +249,18 @@ class UsersController extends Controller
         $user->update($data);
 
         return redirect()->back()->with('status', 'Your account has been updated');
+    }
+
+    function find(Request $request){
+        $request->validate([
+          'query'=>'required|min:2'
+        ]);
+
+        $search_text = $request->input('query');
+        $countries = DB::table('country')
+            ->where('Name','LIKE','%'.$search_text.'%')
+            ->paginate(2);
+        return view('search',['countries'=>$countries]);
+
     }
 }
