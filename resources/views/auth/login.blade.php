@@ -114,6 +114,32 @@
                             <div class="form-group"> 
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
+
+                            @if(isset($professors))
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Professor</th>
+                                            <th>Room</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(count($professors) > 0)
+                                            @foreach($professors as $professor)
+                                                <tr>
+                                                    <td>{{ $professors->name }}</td>
+                                                    <td>{{ $professors->rooms }}</td>
+                                                    <td>{{ $professors->timeslots }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+
+                                            <tr><td>No result found!</td></tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            @endif
                         </form>
                     </div>
 

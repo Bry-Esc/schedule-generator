@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Auth;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Services\Helpers;
 use Illuminate\Http\Request;
@@ -257,10 +257,9 @@ class UsersController extends Controller
         ]);
 
         $search_text = $request->input('query');
-        $countries = DB::table('country')
-            ->where('Name','LIKE','%'.$search_text.'%')
-            ->paginate(2);
-        return view('search',['countries'=>$countries]);
-
+        $professors = DB::table('professors')
+        ->where('name', 'like', '%' . $search_text . '%')
+        ->paginate(2);
+        return view('auth/login', ['professors' => $professors]);
     }
 }
