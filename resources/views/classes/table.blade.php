@@ -34,6 +34,9 @@
                         @endforeach
                     </td>
                     <td>
+                        
+                    </td>
+                    <td>
                         @if (count($class->unavailable_rooms))
                         <ul>
                             @foreach ($class->unavailable_rooms as $room)
