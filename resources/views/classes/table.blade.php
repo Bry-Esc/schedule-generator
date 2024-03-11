@@ -4,9 +4,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="table-head">
-                    <th style="width: 30%">Name</th>
+                    <th style="width: 30%">Course</th>
                     <th style="width: 10%">Size</th>
-                    <th style="width: 30%">Courses</th>
+                    <th style="width: 30%">Subjects</th>
                     <th style="width: 20%">Unavailable Rooms</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
@@ -18,6 +18,7 @@
                     <td>{{ $class->name }}</td>
                     <td>{{ $class->size }}</td>
                     <td>
+                        {{-- Subjects --}}
                         @foreach ($academicPeriods as $period)
                             {{ $period->name }}
                             <?php $courses = $class->courses()->wherePivot('academic_period_id', $period->id)->get(); ?>

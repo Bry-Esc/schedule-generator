@@ -128,9 +128,9 @@
                                         @if(count($professors) > 0)
                                             @foreach($professors as $professor)
                                                 <tr>
-                                                    <td>{{ $professors->name }}</td>
-                                                    <td>{{ $professors->rooms }}</td>
-                                                    <td>{{ $professors->timeslots }}</td>
+                                                    <td>{{ $professor->name }}</td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </tr>
                                             @endforeach
                                         @else

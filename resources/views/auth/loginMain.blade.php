@@ -17,14 +17,19 @@
             <div class="row">
                 <div class="container-fluid header">    
                     <div class="col-md-1 pull-left">
-                        <img class="logo" src="{{ asset('images/schd-logo-white.png') }}" alt="pcuLogo"/>
+                        <img class="logo" src="{{ asset('images/pcuLogo.png') }}" alt="pcuLogo" />
                     </div>
                     <div class="col-md-8"><span class="schoolname">Philippine Christian University Dasma Campus </span>
                         <span class="address"><br>Sampaloc 1, City of Dasmariñas</span>
                         <span class="address"><br>Cavite, Philippines</span>
                     </div>
                     {{-- <div class="col-md-3 sis"><span id="sisname">Scheduling System</span></div> --}}
-                </div>  
+                    <div class = "btn1 pull-right">
+                        <a href="login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-md-4 col-sm-8 col-lg-4 col-md-offset-4 col-sm-offset-2 col-lg-offset-4">
                     <div id="login-form-container">
                         <div class="login-form-header">

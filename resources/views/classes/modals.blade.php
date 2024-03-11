@@ -22,7 +22,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Course</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
@@ -31,7 +31,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4 col-sm-7 col-xs-12">
-                                        Course
+                                        Subject
                                     </div>
 
                                     <div class="col-md-4 col-sm-12 col-xs-12">

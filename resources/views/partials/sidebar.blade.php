@@ -12,14 +12,6 @@
                 <li class="menu-link {{ ($page == 'dashboard') ? 'active' : '' }}">
                     <a href="/dashboard"><span class="fa fa-dashboard"></span><span class="text">Dashboard</span></a>
                 </li>
-                
-                <li class="menu-link {{ ($page == 'rooms') ? 'active' : '' }}">
-                    <a href="/rooms"><span class="fa fa-home"></span><span class="text">Room</span></a>
-                </li>
-
-                <li class="menu-link {{ ($page == 'section') ? 'active' : '' }}">
-                    <a href="/section"><span class="fa fa-home"></span><span class="text">Section</span></a>
-                </li>
 
                 <li class="menu-link dropdown {{ ($page == 'courses' || $page == 'classes' || $page == 'timeslots') ? 'active' : '' }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -29,6 +21,12 @@
                         <li><a href="/courses"><span class="fa fa-book"></span><span class="text">Curriculum</a></li>
                         <li><a href="/classes"><span class="fa fa-users"></span><span class="text">Classes</a></li>
                         <li><a href="/timeslots"><span class="fa fa-clock-o"></span><span class="text">Periods</a></li>
+                        <li class="menu-link {{ ($page == 'rooms') ? 'active' : '' }}">
+                            <a href="/rooms"><span class="fa fa-home"></span><span class="text">Room</span></a>
+                        </li>
+                        <li class="menu-link {{ ($page == 'section') ? 'active' : '' }}">
+                            <a href="/section"><span class="fa fa-home"></span><span class="text">Section</span></a>
+                        </li>
                     </ul>
                 </li>
 
