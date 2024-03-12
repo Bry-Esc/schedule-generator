@@ -115,7 +115,7 @@
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
 
-                            @if(isset($professors))
+                            @if(isset($professor_schedules))
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -125,12 +125,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($professors) > 0)
-                                            @foreach($professors as $professor)
+                                        @if(count($professor_schedules) > 0)
+                                            @foreach($professor_schedules as $professor_schedule)
                                                 <tr>
-                                                    <td>{{ $professor->name }}</td>
+                                                    <td>{{ $professor_schedule->professor->name }}</td>
                                                     <td></td>
-                                                    <td></td>
+                                                    <td>{{ $professor_schedule->timeslots->time }}</td>
+                                                    {{-- <td>
+                                                        @if (isset($professor->timeslots))
+                                                            <ul>
+                                                                <li>{{ $timeslot->time }}</li>
+                                                            </ul>
+                                                        @else
+                                                            <p>No unavailable Time</p>
+                                                        @endif
+                                                    </td> --}}
                                                 </tr>
                                             @endforeach
                                         @else

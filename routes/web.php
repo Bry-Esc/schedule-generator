@@ -38,8 +38,8 @@ Route::resource('timeslots', 'TimeslotsController');
 // Routes for professors module
 Route::resource('professors', 'ProfessorsController');
 
-// Routes for college classes
-Route::resource('classes', 'CollegeClassesController');
+// Routes for curriculum
+Route::resource('curriculum', 'CollegeClassesController');
 
 // Routes for timetable generation
 Route::post('timetables', 'TimetablesController@store');

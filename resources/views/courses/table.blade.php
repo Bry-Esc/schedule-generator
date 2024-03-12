@@ -6,7 +6,7 @@
                 <tr class="table-head">
                     <th style="width: 30%">Course Code</th>
                     <th style="width: 30%">Name</th>
-                    <th style="width: 30%">Taught By</th>
+                    <th style="width: 30%">Professor</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
             </thead>
@@ -19,10 +19,11 @@
                     <td>
                         <ul>
                         @foreach ($course->professors as $professor)
-                        <li>{{ $professor->name }}</li>
+                            <li>{{ $professor->name }}</li>
                         @endforeach
                         </ul>
                     </td>
+                    <td>{{ $course->name }}</td>
                     <td>
                     <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $course->id }}"><i class="fa fa-pencil"></i></button>
                     <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $course->id }}"><i class="fa fa-trash-o"></i></button></td>

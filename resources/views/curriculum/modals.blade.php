@@ -22,16 +22,16 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Course</label>
+                                <label>School Year</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label>Courses <i class="fa fa-plus side-icon" title="Add Course" id="course-add"></i></label>
+                                <label>Subject Title <i class="fa fa-plus side-icon" title="Add Course" id="course-add"></i></label>
 
                                 <div class="row">
                                     <div class="col-md-4 col-sm-7 col-xs-12">
-                                        Subject
+                                        Subject Title
                                     </div>
 
                                     <div class="col-md-4 col-sm-12 col-xs-12">
@@ -39,8 +39,13 @@
                                     </div>
 
                                     <div class="col-md-3 col-sm-5 col-xs-12">
-                                        Meetings Per Week
+                                        Units 
                                     </div>
+
+                                    <div class="col-md-4 col-sm-5 col-xs-12">
+                                        Meetings Per Week 
+                                    </div>
+
                                 </div>
 
                                 <div id="courses-container">
@@ -114,6 +119,10 @@
         <div class="col-md-3 col-sm-4 col-xs-10">
             <input type="number" class="form-control course-meetings" name="course-{ID}-meetings">
         </div>
+        
+        {{-- <div class="col-md-3 col-sm-4 col-xs-10">
+            <input type="number" class="form-control course-meetings" name="course-{ID}-meetings">
+        </div> --}}
 
         <div class="col-md-1 col-sm-1 col-xs-2">
             <span class="fa fa-close side-icon course-remove" title="Remove Course" data-id="{ID}"></span>

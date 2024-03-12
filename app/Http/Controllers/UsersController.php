@@ -2,24 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\Day;
+use App\Models\User;
+use App\Models\Course;
+use App\Models\Timeslot;
 use App\Services\Helpers;
+
 use Illuminate\Http\Request;
 
+
+use App\Models\SecurityQuestion;
+
+use App\Models\ProfessorSchedule;
+
+use Illuminate\Support\Facades\DB;
+use App\Services\ProfessorsService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Events\PasswordResetRequested;
 
-use App\Models\User;
-use App\Models\SecurityQuestion;
 
 class UsersController extends Controller
 {
-    public function __construct()
+    protected $service;
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', ['only' => ['showAccountPage', 'showActivationPage', 'updateAccount']]);
+    // }
+
+    public function __construct(ProfessorsService $service)
     {
+        $this->service = $service;
         $this->middleware('auth', ['only' => ['showAccountPage', 'showActivationPage', 'updateAccount']]);
     }
+
     /**
      * Show page for logging user in
      */
@@ -251,15 +269,45 @@ class UsersController extends Controller
         return redirect()->back()->with('status', 'Your account has been updated');
     }
 
-    function find(Request $request){
+    // function find(Request $request){
+    //     $request->validate([
+    //       'query'=>'required|min:2'
+    //     ]);
+
+    //     $search_text = $request->input('query');
+
+    //     $professors = DB::table('professors')
+    //     ->where('name', 'like', '%' . $search_text . '%')
+    //     ->paginate(2);
+
+    //     $professor_schedules = ProfessorSchedule::all();
+
+    //     return view('auth/login', ['professor_schedules' => $professors]);
+    // }
+
+    public function find(Request $request) {
         $request->validate([
-          'query'=>'required|min:2'
+            'query' => 'required|min:2'
         ]);
 
         $search_text = $request->input('query');
-        $professors = DB::table('professors')
-        ->where('name', 'like', '%' . $search_text . '%')
-        ->paginate(2);
-        return view('auth/login', ['professors' => $professors]);
+
+        $professors = $this->service->all([
+            'keyword' => $search_text,
+            'order_by' => 'name',
+            'paginate' => 'true',
+            'per_page' => 20
+        ]);
+
+        $courses = Course::all();
+        $days = Day::all();
+        $timeslots = Timeslot::all();
+        $professor_schedules = ProfessorSchedule::all();
+
+        // if ($request->ajax()) {
+        //     return view('professors.table', compact('professors'));
+        // }
+
+        return view('auth/login', compact('professors', 'courses', 'days', 'timeslots', 'professor_schedules'));
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\Course;
 use App\Models\CollegeClass;
 use App\Models\AcademicPeriod;
+use App\Models\Professor;
 
 class CollegeClassesController extends Controller
 {
@@ -46,13 +47,13 @@ class CollegeClassesController extends Controller
         $rooms = Room::all();
         $courses = Course::all();
         $academicPeriods = AcademicPeriod::all();
+        $professors = Professor::all();
 
+        // if ($request->ajax()) {
+        //     return view('classes.table', compact('classes', 'academicPeriods'));
+        // }
 
-        if ($request->ajax()) {
-            return view('classes.table', compact('classes', 'academicPeriods'));
-        }
-
-        return view('classes.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
+        return view('curriculum.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
     }
 
     /**
@@ -63,15 +64,19 @@ class CollegeClassesController extends Controller
      */
     public function store(Request $request)
     {
+        // 1. Validation Rules
         $rules = [
             'name' => 'required|unique:classes',
             'size' => 'required'
         ];
 
+        // 2. Validate Input
         $this->validate($request, $rules);
 
+        // 3. Store Data (using a service)
         $class = $this->service->store($request->all());
 
+        // 4. Handle Success/Error
         if ($class) {
             return response()->json(['message' => 'Class added'], 200);
         } else {
