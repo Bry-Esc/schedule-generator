@@ -1,20 +1,4 @@
 <div class="container-fluid" style="margin-top: 15px;">
-    @if(Session::has('success'))
-    <div class='col-sm-12'>
-        <div class='callout callout-success'>
-            {{Session::get('success')}}
-        </div>
-    </div>
-    @endif
-    
-    @if(Session::has('error'))
-    <div class='col-sm-12'>
-        <div class='callout callout-danger'>
-            {{Session::get('error')}}
-        </div>
-    </div>
-    @endif
-    
     <div class='row'>
         <div class='col-sm-5'>
             <div class='box box-solid box-default'>
@@ -22,34 +6,25 @@
                     <h5 class="box-title">New Section</h5>
                 </div>
                 <div class='box-body'>
-                    <form action="{{url('/admin/section_management/post')}}" method="post">
-                    {{csrf_field()}}
-                    <div class='form-group'>
-                        <label>Academic Program</label>
-                        <select class="select2 form-control" class="select2 form-control"name="program_code" id="program_code" required class='form-control'>
-                            <option>Please Select</option>
-                            {{-- @foreach($programs as $program) --}}
-                            <option>BSIT</option>
-                            <option>BSCS</option>
-                            {{-- @endforeach --}}
-                        </select>
-                    </div>
-                    <div class='form-group'>
-                        <label>Level</label>
-                        <select name="level" required class='select2 form-control'>
-                            <option>1st Year</option>
-                            <option>2nd Year</option>
-                            <option>3rd Year</option>
-                            <option>4th Year</option>
-                        </select>
-                    </div>
-                    <div class='form-group'>
-                        <label>Section</label>
-                        <input id="section_name" required name="section_name" type="text" class="form-control">
-                    </div>
-                    <div class='form-group'>
-                        <button onclick='return confirm("Clicking the OK button will save the record? Do you wish to continue?")' type='submit' class='btn btn-flat btn-success btn-block'>Save and Submit</button>
-                    </div>
+                    <form class="form" method="post" action="" id="resource-form">
+                        {{csrf_field()}}
+                        <div class='form-group'>
+                            <label>Add New Section</label>
+                            <input type="text" name="program_code" class="form-control">
+                        </div>
+                        <div class='form-group'>
+                            <label>Level</label>
+                            <select name="level" class="form-control select2">
+                                <option value="">Select Year Level</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                            </select>
+                        </div>
+                        <div class='form-group'>
+                            <button type='submit' class='btn btn-flat btn-success btn-block'>Save and Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -67,10 +42,10 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th width='20%'>Program Code</th>
-                                    <th width='20%'>Level</th>
                                     <th width='20%'>Section Name</th>
-                                    <th width='20%'>Status</th>
+                                    <th width='20%'>Level</th>
+                                    {{-- <th width='20%'>Section Name</th>
+                                    <th width='20%'>Status</th> --}}
                                     <th width='20%'>Action</th>
                                 </tr>
                             </thead>
@@ -78,16 +53,16 @@
                                 {{-- @if(!$sections->isEmpty())
                                 @foreach($sections as $section) --}}
                                 <tr>
-                                    <td>CSM</td>
-                                    <td>1</td>
                                     <td>BSCS</td>
-                                    <td>
-                                        {{-- @if($section->is_active == 1) --}}
+                                    <td>1</td>
+                                    {{-- <td>BSCS</td> --}}
+                                    {{-- <td>
+                                        @if($section->is_active == 1)
                                         <label class='label label-success'>Active</label>
-                                        {{-- @else --}}
-                                        {{-- <label class='label label-danger'>Inactive</label> --}}
-                                        {{-- @endif --}}
-                                    </td>
+                                        @else
+                                        <label class='label label-danger'>Inactive</label>
+                                        @endif
+                                    </td> --}}
                                     <td>
                                         {{-- <button data-toggle="modal" data-target="#myModal" onclick="editsection('{{$section->id}}')" title="Edit Record" class="btn btn-flat btn-primary"><i class="fa fa-pencil"></i></button>
                                         <a href="{{url('/admin/section_management/archive',array($section->id))}}" class="btn btn-flat btn-danger" title="Change to Inactive Status?" onclick="confirm('Do you wish to archive the Record?')"><i class="fa fa-times"></i></a> --}}

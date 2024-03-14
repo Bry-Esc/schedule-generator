@@ -6,15 +6,14 @@ use Carbon\Carbon;
 use App\Models\Day;
 use App\Models\User;
 use App\Models\Course;
-use App\Models\Timeslot;
+use App\Models\Timetable;
+
 use App\Services\Helpers;
+
 
 use Illuminate\Http\Request;
 
-
 use App\Models\SecurityQuestion;
-
-use App\Models\ProfessorSchedule;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\ProfessorsService;
@@ -291,20 +290,13 @@ class UsersController extends Controller
         ]);
 
         $search_text = $request->input('query');
-
-        $professors = $this->service->all([
-            'keyword' => $search_text,
-            'order_by' => 'name',
-            'paginate' => 'true',
-            'per_page' => 20
-        ]);
-
-        $courses = Course::all();
+        
+        $timetables = Timetable::where('name', 'like', '%' . $search_text . '%')->get();
 
         // if ($request->ajax()) {
         //     return view('professors.table', compact('professors'));
         // }
 
-        return view('auth/login', compact('courses'));
+        return view('auth/login', compact('timetables'));
     }
 }

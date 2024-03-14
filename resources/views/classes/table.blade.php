@@ -9,7 +9,8 @@
                     <th style="width: 20%">Academic Periods</th>
                     <th style="width: 30%">Subject Title</th>
                     <th style="width: 10%">Units</th>
-                    <th style="width: 10%">Available Rooms</th> {{-- !! Rooms Still Unavailable !! --}}
+                    <th style="width: 10%">Available Rooms</th> 
+                    {{-- <th style="width: 10%">Unavailable Rooms</th> --}}
                     <th style="width: 30%">Actions</th>
                 </tr>
             </thead>
@@ -56,7 +57,31 @@
                                 @endif
                             </td>
 
+                            {{-- Available Rooms --}}
+                            @php
+                                // Get all rooms
+                                $allRooms = \App\Models\Room::all()->pluck('name')->toArray();
+
+                                // Get unavailable rooms
+                                $unavailableRooms = $class->unavailable_rooms->pluck('name')->toArray();
+
+                                // Get available rooms
+                                $availableRooms = array_diff($allRooms, $unavailableRooms);
+                            @endphp
                             <td>
+                                @if (count($availableRooms))
+                                    <ul>
+                                        @foreach ($availableRooms as $room)
+                                            <li>{{ $room }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    None available
+                                @endif
+                            </td>
+                            
+                            {{-- Unavailable Rooms --}}
+                            {{-- <td>
                                 @if (count($class->unavailable_rooms))
                                 <ul>
                                     @foreach ($class->unavailable_rooms as $room)
@@ -66,7 +91,7 @@
                                 @else
                                 None specified
                                 @endif
-                            </td>
+                            </td> --}}
                             
                             <td>
                             <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $class->id }}"><i class="fa fa-pencil"></i></button>

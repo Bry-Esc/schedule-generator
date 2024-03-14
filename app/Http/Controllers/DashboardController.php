@@ -15,6 +15,8 @@ class DashboardController extends Controller
      * Create a new instance of this controller
      *
      */
+    private $service;
+
     public function __construct(DashboardService $service)
     {
         $this->service = $service;

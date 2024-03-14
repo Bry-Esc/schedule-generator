@@ -115,22 +115,29 @@
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
 
-                            @if(isset($courses))
+                            @if(isset($timetables))
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Course</th>
-                                            <th>Room</th>
-                                            <th>Time</th>
+                                            <th>Section Name</th>
+                                            {{-- <th>Room</th> --}}
+                                            <th style="width: 10%">Print</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($courses) > 0)
-                                            @foreach($courses as $course)
+                                        @if(count($timetables) > 0)
+                                            @foreach($timetables as $timetable)
                                                 <tr>
-                                                    <td>{{ $course->name }}</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{ $timetable->name }}</td>
+                                                    <td>
+                                                        @if($timetable->file_url)
+                                                        <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"
+                                                           class="btn btn-sm btn-primary"
+                                                        data-id="{{ $timetable->id }}"><span class="fa fa-print"></span> PRINT</a>
+                                                        @else
+                                                        N/A
+                                                        @endif
+                                                    </td>
                                                     {{-- <td>
                                                         @if (isset($professor->timeslots))
                                                             <ul>
