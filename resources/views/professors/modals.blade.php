@@ -30,10 +30,10 @@
                                 {{-- <label>Email</label> --}}
                                 <label>Department</label>
                                 <div class="select2-wrapper">
-                                    <select class="form-control select2">
+                                    <select id="department-select" name="department" class="form-control select2">
                                         <option value="">Select Department</option>
-                                        <option value="">COI</option>
-                                        <option value="">COE</option>
+                                        <option value="COI">COI</option>
+                                        <option value="COE">COE</option>
                                     </select>
                                 </div>
                             </div>
@@ -54,10 +54,10 @@
                                 {{-- <label>Email</label> --}}
                                 <label>Employee Status</label>
                                 <div class="select2-wrapper">
-                                    <select class="form-control select2">
+                                    <select id="employment-status-select" name="employment_status" class="form-control select2">
                                         <option value="">Select Status</option>
-                                        <option value="">Full Time</option>
-                                        <option value="">Part Time</option>
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
                                     </select>
                                 </div>
                             </div>

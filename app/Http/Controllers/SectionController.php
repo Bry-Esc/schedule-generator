@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CollegeClass;
 use service;
 
 class SectionController extends Controller
@@ -14,6 +15,7 @@ class SectionController extends Controller
             return view('section.table', compact('section'));
         }
 
-        return view('section.index', compact('section'));
+        // return view('section.index', compact('section'));
+        return view('section.index');
     }
 }

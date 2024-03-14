@@ -58,12 +58,14 @@ class CoursesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required',
             'course_code' => 'required|unique:courses,course_code',
+            'name' => 'required',
+            'units' => 'required|numeric',
         ];
 
         $messages = [
-            'name.unique' => 'This course already exists',
+            'name.required' => 'The subject title field is required',
+            'name.unique' => 'This subject title field already exists',
         ];
 
         $this->validate($request, $rules, $messages);

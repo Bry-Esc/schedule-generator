@@ -300,14 +300,11 @@ class UsersController extends Controller
         ]);
 
         $courses = Course::all();
-        $days = Day::all();
-        $timeslots = Timeslot::all();
-        $professor_schedules = ProfessorSchedule::all();
 
         // if ($request->ajax()) {
         //     return view('professors.table', compact('professors'));
         // }
 
-        return view('auth/login', compact('professors', 'courses', 'days', 'timeslots', 'professor_schedules'));
+        return view('auth/login', compact('courses'));
     }
 }

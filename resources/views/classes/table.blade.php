@@ -4,7 +4,8 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="table-head">
-                    <th style="width: 20%">School Year</th>
+                    {{-- <th style="width: 20%">School Year</th> --}}
+                    <th style="width: 20%">Section</th>
                     <th style="width: 20%">Academic Periods</th>
                     <th style="width: 30%">Subject Title</th>
                     <th style="width: 10%">Units</th>
@@ -17,15 +18,17 @@
                 @foreach($classes as $class)
                     @foreach ($academicPeriods as $period)
                         <tr>
-                            <td>2022-2023</td>
+                            {{-- Section --}}
+                            <td>{{ $class->name }}</td>
 
+                            {{-- Academic Periods --}}
                             <td>
                                 {{ $period->name }}
                                 <?php $courses = $class->courses()->wherePivot('academic_period_id', $period->id)->get(); ?>
                             </td>
 
+                            {{-- Subject Title --}}
                             <td>
-                                {{-- Academic Periods --}}
                                 {{-- {{ $period->name }} --}}
                                 <?php $courses = $class->courses()->wherePivot('academic_period_id', $period->id)->get(); ?>
                                 
@@ -40,7 +43,18 @@
                                 @endif
                             </td>
 
-                            <td>3.0</td>
+                            {{-- Units --}}
+                            <td>
+                                <?php $courses = $class->courses()->wherePivot('academic_period_id', $period->id)->get(); ?>
+                                                                
+                                @if (count($courses))
+                                    @php
+                                        $totalUnits = $courses->sum('units');
+                                    @endphp
+
+                                    <p>{{ $totalUnits }}</p>
+                                @endif
+                            </td>
 
                             <td>
                                 @if (count($class->unavailable_rooms))

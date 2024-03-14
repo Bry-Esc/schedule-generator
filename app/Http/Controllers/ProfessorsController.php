@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Response;
-use Illuminate\Http\Request;
-use App\Services\ProfessorsService;
-
 use App\Models\Day;
 use App\Models\Course;
+
 use App\Models\Timeslot;
 use App\Models\Professor;
+use Illuminate\Http\Request;
 use App\Models\UnavailableTimeslot;
+use App\Services\ProfessorsService;
+use Illuminate\Support\Facades\Log;
 
 class ProfessorsController extends Controller
 {
@@ -66,8 +67,14 @@ class ProfessorsController extends Controller
      */
     public function store(Request $request)
     {
+        // Log::debug('Professor Data:', $request->all());
+        // Log::debug('Department:', $request->department);  // Log specifically
+        // Log::debug('Employment Status:', $request->employment_status); // Log specifically
+
         $rules = [
-            'name' => 'required'
+            'name' => 'required',
+            'department' => 'required',
+            'employment_status' => 'required'
         ];
 
         // if ($request->has('email') && $request->email) {

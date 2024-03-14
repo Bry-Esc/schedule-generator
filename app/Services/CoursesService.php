@@ -34,7 +34,8 @@ class CoursesService extends AbstractService
     {
         $course = Course::create([
             'name' => $data['name'],
-            'course_code' => $data['course_code']
+            'course_code' => $data['course_code'],
+            'units' => $data['units']
         ]);
 
         if (!$course) {

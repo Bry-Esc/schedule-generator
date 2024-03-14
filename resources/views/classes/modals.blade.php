@@ -22,7 +22,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>School Year</label>
+                                <label>Section</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
@@ -38,9 +38,9 @@
                                         Academic Period
                                     </div>
 
-                                    <div class="col-md-3 col-sm-5 col-xs-12">
+                                    {{-- <div class="col-md-3 col-sm-5 col-xs-12">
                                         Units 
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-4 col-sm-5 col-xs-12">
                                         Meetings Per Week 

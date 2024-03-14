@@ -115,22 +115,22 @@
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
 
-                            @if(isset($professor_schedules))
+                            @if(isset($courses))
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Professor</th>
+                                            <th>Course</th>
                                             <th>Room</th>
                                             <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($professor_schedules) > 0)
-                                            @foreach($professor_schedules as $professor_schedule)
+                                        @if(count($courses) > 0)
+                                            @foreach($courses as $course)
                                                 <tr>
-                                                    <td>{{ $professor_schedule->professor->name }}</td>
+                                                    <td>{{ $course->name }}</td>
                                                     <td></td>
-                                                    <td>{{ $professor_schedule->timeslots->time }}</td>
+                                                    <td></td>
                                                     {{-- <td>
                                                         @if (isset($professor->timeslots))
                                                             <ul>

@@ -7,7 +7,8 @@
                     <span aria-hidden="true">x</span>
                 </button>
 
-                <h4 class="modal-heading">Add New Course</h4>
+                {{-- <h4 class="modal-heading">Add New Academic Period</h4> --}}
+                <h4>Add New Academic Period</h4>
             </div>
 
             <form class="form" method="POST" action="" id="resource-form">
@@ -22,13 +23,18 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Course Code</label>
+                                <input type="text" name="course_code" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Subject Title</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label>Course Code</label>
-                                <input type="text" name="course_code" class="form-control">
+                                <label>Units</label>
+                                <input type="number" name="units" class="form-control" step="1.0">
                             </div>
 
                             <div class="form-group">

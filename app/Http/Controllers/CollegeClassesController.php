@@ -49,11 +49,11 @@ class CollegeClassesController extends Controller
         $academicPeriods = AcademicPeriod::all();
         $professors = Professor::all();
 
-        // if ($request->ajax()) {
-        //     return view('classes.table', compact('classes', 'academicPeriods'));
-        // }
+        if ($request->ajax()) {
+            return view('classes.table', compact('classes', 'academicPeriods'));
+        }
 
-        return view('curriculum.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
+        return view('classes.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
     }
 
     /**

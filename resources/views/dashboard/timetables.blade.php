@@ -6,7 +6,7 @@
                 <tr class="table-head">
                     <td>Schedule Name</td>
                     <td>Status</td>
-                    <td>Action</td>
+                    {{-- <td>Action</td> --}}
                     <td style="width: 10%">Print</td>
                 </tr>
             </thead>
@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ $timetable->name }}</td>
                     <td>{{ $timetable->status }}</td>
-                    <td>
+                    {{-- <td>
                         {{ $timetable->action }}
                         @if($timetable->file_url)
                         <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"
@@ -25,7 +25,7 @@
                         @else
                         N/A
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
                         @if($timetable->file_url)
                         <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"

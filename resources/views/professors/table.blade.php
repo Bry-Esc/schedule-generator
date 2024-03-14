@@ -8,7 +8,7 @@
                         <th style="width: 10%">Department</th>
                         <th style="width: 26%">Courses Taught</th>
                         <th style="width: 20%">Employee Status</th>
-                        <th style="width: 20%">Unavailable Periods</th>
+                        <th style="width: 20%">Available Periods</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -17,9 +17,7 @@
                     @foreach($professors as $professor)
                     <tr>
                         <td>{{ $professor->name }}</td>
-                        <td>
-                            COI
-                        </td>
+                        <td>{{$professor->department}}</td>
                         <td>
                             @if (count($professor->courses))
                                 <ul>
@@ -31,12 +29,35 @@
                                 <p>No courses added yet</p>
                             @endif
                         </td>
+                        <td>{{$professor->employment_status}}</td>
                         <td>
-                            {{-- Employee Status --}}
-                            <p>Full Time</p>
-                        </td>
-                        <td>
-                            @if (count($professor->unavailable_timeslots))
+                            @php
+                                // Get all days
+                                $allDays = \App\Models\Day::all()->pluck('name')->toArray();
+
+                                // Remove 'Sunday' from the array
+                                $allDays = array_filter($allDays, function($day) {
+                                    return $day !== 'Sunday';
+                                });
+
+                                // Get unavailable days
+                                $unavailableDays = $professor->unavailable_timeslots->pluck('day.name')->toArray();
+
+                                // Get available days
+                                $availableDays = array_diff($allDays, $unavailableDays);
+                            @endphp
+
+                            @if (count($availableDays))
+                                <ul>
+                                    @foreach ($availableDays as $day)
+                                        <li>{{ $day }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>All days are unavailable</p>
+                            @endif
+                            
+                            {{-- @if (count($professor->unavailable_timeslots))
                                 <ul>
                                     @foreach ($professor->unavailable_timeslots as $period)
                                         <li>{{ $period->day->name}}</li>
@@ -44,11 +65,12 @@
                                 </ul>
                             @else
                                 <p>No unavailable periods</p>
-                            @endif
+                            @endif --}}
                         </td>
                         <td>
-                        <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $professor->id }}"><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $professor->id }}"><i class="fa fa-trash-o"></i></button></td>
+                            <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $professor->id }}"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $professor->id }}"><i class="fa fa-trash-o"></i></button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

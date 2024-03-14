@@ -25,9 +25,7 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::resource('rooms', 'RoomsController');
 
 // Routes for section module
-Route::get('/section', function() {
-    return view('section.index');
-});
+Route::resource('section', 'SectionController');
 
 // Routes for courses module
 Route::resource('courses', 'CoursesController');
@@ -39,7 +37,7 @@ Route::resource('timeslots', 'TimeslotsController');
 Route::resource('professors', 'ProfessorsController');
 
 // Routes for curriculum
-Route::resource('curriculum', 'CollegeClassesController');
+Route::resource('classes', 'CollegeClassesController');
 
 // Routes for timetable generation
 Route::post('timetables', 'TimetablesController@store');

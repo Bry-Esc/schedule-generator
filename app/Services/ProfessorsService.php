@@ -29,7 +29,8 @@ class ProfessorsService extends AbstractService
     {
         $professor = Professor::create([
             'name' => $data['name'],
-            'email' => $data['email']
+            'department' => $data['department'],
+            'employment_status' => $data['employment_status']
         ]);
 
         if (!$professor) {

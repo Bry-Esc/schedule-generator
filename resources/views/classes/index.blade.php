@@ -17,11 +17,11 @@ Classes
     </div>
 
     <div class="page-body" id="resource-container">
-        @include('curriculum.table')
+        @include('classes.table')
     </div>
 </div>
 
-@include('curriculum.modals')
+@include('classes.modals')
 @endsection
 
 @section('scripts')
