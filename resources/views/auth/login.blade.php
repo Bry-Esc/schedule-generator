@@ -150,8 +150,9 @@
                                                 </tr>
                                             @endforeach
                                         @else
-
-                                            <tr><td>No result found!</td></tr>
+                                            <tr>
+                                                <td>No result found!</td>
+                                            </tr>
                                         @endif
                                     </tbody>
                                 </table>

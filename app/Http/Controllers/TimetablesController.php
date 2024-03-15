@@ -24,8 +24,8 @@ class TimetablesController extends Controller
     public function __construct(TimetableService $service)
     {
         $this->service = $service;
-        $this->middleware('auth');
-        $this->middleware('activated');
+        // $this->middleware('auth');
+        // $this->middleware('activated');
     }
 
     /**
