@@ -18,7 +18,7 @@ Dashboard
                 <div class="row cards-container">
                     <?php $count = 1; ?>
                     @foreach ($data['cards'] as $card)
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"> <!-- Change col-md-3 to col-md-4 -->
                         <div class="card card-{{ $count++ }}">
                             <div class="card-title">
                                 <span class="pull-right icon fa fa-{{$card['icon'] }}"></span>
@@ -36,7 +36,7 @@ Dashboard
         </div>
 
         <div class="row" style="margin-top: 50px">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
+            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-2"> <!-- Change col-md-4 to col-md-6 and col-sm-4 to col-sm-8 -->
                 <button class="btn-primary timetable-btn btn-block" id="resource-add-button"><i class="fa fa-calendar"></i> Generate New Schedules</button>
             </div>
         </div>

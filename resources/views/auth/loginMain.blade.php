@@ -33,6 +33,7 @@
                 <div class="col-xs-12 col-md-4 col-sm-8 col-lg-4 col-md-offset-4 col-sm-offset-2 col-lg-offset-4">
                     <div id="login-form-container">
                         <div class="login-form-header">
+                            <img class="tchschedlogo" src="{{ asset('images/schd-logo-white.png') }}" alt="tchschedlogo" />
                             <h3 class="text-center">TechSCHD</h3>
                         </div>
 

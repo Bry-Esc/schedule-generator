@@ -92,7 +92,8 @@ class CoursesService extends AbstractService
 
         $course->update([
             'name' => $data['name'],
-            'course_code' => $data['course_code']
+            'course_code' => $data['course_code'],
+            'units' => $data['units']
         ]);
 
         if (!isset($data['professor_ids'])) {

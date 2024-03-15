@@ -12,6 +12,14 @@
 		@yield('styles')
 
 		<title>@yield('title') | TechSCHD</title>
+
+        <style>
+            @media (max-width: 991px) {
+                .sidebar {
+                    display: none;
+                }
+            }
+        </style>
     </head>
 
     <body>

@@ -63,6 +63,13 @@
             margin-left: 400px;
             
         }
+
+        @media (max-width: 768px) {
+            .S1 {
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+        }
     </style>
     <!-- Styles -->
     @include('partials.styles')
@@ -133,7 +140,7 @@
                                                         @if($timetable->file_url)
                                                         <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"
                                                            class="btn btn-sm btn-primary"
-                                                        data-id="{{ $timetable->id }}"><span class="fa fa-print"></span> PRINT</a>
+                                                        data-id="{{ $timetable->id }}"><span class="fa fa-print"></span> View</a>
                                                         @else
                                                         N/A
                                                         @endif

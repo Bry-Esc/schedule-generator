@@ -31,6 +31,7 @@ class ProfessorsService extends AbstractService
             'name' => $data['name'],
             'department' => $data['department'],
             'employment_status' => $data['employment_status']
+            // 'email' => $data['email']
         ]);
 
         if (!$professor) {
@@ -103,7 +104,10 @@ class ProfessorsService extends AbstractService
 
         $professor->update([
             'name' => $data['name'],
-            'email' => $data['email']
+            'name' => $data['name'],
+            'department' => $data['department'],
+            'employment_status' => $data['employment_status']
+            // 'email' => $data['email']
         ]);
 
         if (!isset($data['course_ids'])) {
