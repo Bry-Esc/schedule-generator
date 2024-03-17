@@ -59,24 +59,39 @@ class UsersController extends Controller
     public function loginUser(Request $request)
     {
         $rules = [
+            "email" => "required|email",
             'password' => 'required'
         ];
 
         $this->validate($request, $rules);
 
-        $user = User::first();
+        // $field = filter_var($request->login_field, FILTER_VALIDATE_EMAIL) ? 'email' : 'username'; 
 
-        if (!$user) {
-            return redirect()->back()->withErrors(['No user account has been set up yet']);
-        }
+        // $credentials = [
+        //     $field => $request->login_field, 
+        //     'password' => $request->password
+        // ];
 
-        if (!Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withErrors(['Password is invalid']);
-        }
+        if (auth()->attempt(\request()->only('email', 'password'))) {
+            // Authentication was successful
+            return redirect()->intended('/'); // Redirect as needed
+        } 
 
-        Auth::login($user);
+        return redirect()->back()->withErrors(['Invalid credentials']);
 
-        return redirect('/');
+        // $user = User::first();
+
+        // if (!$user) {
+        //     return redirect()->back()->withErrors(['No user account has been set up yet']);
+        // }
+
+        // if (!Hash::check($request->password, $user->password)) {
+        //     return redirect()->back()->withErrors(['Password is invalid']);
+        // }
+
+        // Auth::login($user);
+
+        // return redirect('/');
     }
 
     /**
@@ -235,7 +250,10 @@ class UsersController extends Controller
      */
     public function updateAccount(Request $request)
     {
+        $user = Auth::user();
+
         $rules = [
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'name' => 'required',
             'security_question_id' => 'required',
             'security_question_answer' => 'required'
@@ -248,8 +266,8 @@ class UsersController extends Controller
 
         $this->validate($request, $rules);
 
-        $user = Auth::user();
         $data = [
+            'email' => $request->email,
             'name' => $request->name,
             'security_question_id' => $request->security_question_id,
             'security_question_answer' => $request->security_question_answer

@@ -35,11 +35,13 @@ Dashboard
             </div>
         </div>
 
-        <div class="row" style="margin-top: 50px">
-            <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-2"> <!-- Change col-md-4 to col-md-6 and col-sm-4 to col-sm-8 -->
-                <button class="btn-primary timetable-btn btn-block" id="resource-add-button"><i class="fa fa-calendar"></i> Generate New Schedules</button>
+        @if (Auth::user()->accesslevel == 100)
+            <div class="row" style="margin-top: 50px">
+                <div class="col-lg-4 col-md-6 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-2"> <!-- Change col-md-4 to col-md-6 and col-sm-4 to col-sm-8 -->
+                    <button class="btn-primary timetable-btn btn-block" id="resource-add-button"><i class="fa fa-calendar"></i> Generate New Schedules</button>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <div id="resource-container">

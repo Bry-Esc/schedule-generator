@@ -25,7 +25,13 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                @include('partials.sidebar')
+                @if (Auth::user()->accesslevel == 100)
+                    @include('partials.admin.sidebar')
+                @elseif (Auth::user()->accesslevel == 5)
+                    @include('partials.dean.sidebar')
+                @elseif (Auth::user()->accesslevel == 1)
+                    @include('partials.head.sidebar')
+                @endif
 
                 @yield('content')
             </div>

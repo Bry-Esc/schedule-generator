@@ -91,7 +91,8 @@
             </div> --}}
             <div class = "btn1 pull-right">
                 <a href="loginMain" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
-                    Login
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    Sign In
                 </a>
             </div>
         </div>

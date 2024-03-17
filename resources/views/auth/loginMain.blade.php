@@ -27,6 +27,7 @@
                     <div class = "btn1 pull-right">
                         <a href="login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
                             <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            Back
                         </a>
                     </div>
                 </div>
@@ -47,7 +48,7 @@
 
                                         <div class="form-group">
                                             <label>Email</label>
-                                                    <input type="username" class="form-control" placeholder="Email" name="Email">
+                                            <input type="username" class="form-control" placeholder="Email" name="email">
                                         </div>
                                         
                                         <div class="form-group">
