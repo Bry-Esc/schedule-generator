@@ -129,7 +129,7 @@
                                         <tr>
                                             <th>Section Name</th>
                                             {{-- <th>Room</th> --}}
-                                            <th style="width: 10%">Print</th>
+                                            <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -139,11 +139,10 @@
                                                     <td>{{ $timetable->name }}</td>
                                                     <td>
                                                         @if($timetable->file_url)
-                                                        <a href="{{ URL::to('/timetables/view/' . $timetable->id) }}"
-                                                           class="btn btn-sm btn-primary"
-                                                        data-id="{{ $timetable->id }}"><span class="fa fa-print"></span> View</a>
+                                                            <a class="btn-view btn btn-sm btn-primary"
+                                                            data-id="{{ $timetable->id }}"><i class="fa fa-eye" aria-hidden="true"></i></span> View</a>
                                                         @else
-                                                        N/A
+                                                            N/A
                                                         @endif
                                                     </td>
                                                     {{-- <td>
@@ -166,6 +165,29 @@
                                 </table>
                             @endif
                         </form>
+
+                        <div id="timetableDisplay"></div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var viewButtons = document.querySelectorAll('.btn-view');
+
+                                viewButtons.forEach(function(button) {
+                                    button.addEventListener('click', function(event) {
+                                        event.preventDefault();
+
+                                        var id = this.dataset.id;
+
+                                        fetch('/timetables/render/' + id)
+                                            .then(response => response.text())
+                                            .then(data => {
+                                                document.getElementById('timetableDisplay').innerHTML = data;
+                                            });
+                                    });
+                                });
+                            });
+                        </script>   
+
                     </div>
 
                 </div>

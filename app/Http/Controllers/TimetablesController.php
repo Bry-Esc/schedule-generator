@@ -118,4 +118,18 @@ class TimetablesController extends Controller
             return view('timetables.view', compact('timetableData', 'timetableName'));
         }
     }
+
+    public function render($id)
+    {
+        $timetable = Timetable::find($id);
+
+        if (!$timetable) {
+            return redirect('/');
+        } else {
+            $path = $timetable->file_url;
+            $timetableData =  Storage::get($path);
+            $timetableName = $timetable->name;
+            return view('timetables.render', compact('timetableData', 'timetableName'));
+        }
+    }
 }

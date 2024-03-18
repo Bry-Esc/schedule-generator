@@ -40,10 +40,8 @@ How to install:
    php artisan db:seed
    ```
 
-9. Access the application URL in your web browser. If prompted for a password, use the default password: `admin`.
+9. Start the queue to enable timetable generation:
 
-10. Start the queue to enable timetable generation:
-
-    ```
-    php artisan queue:listen --timeout=0
-    ```
+   ```
+   php artisan queue:listen --timeout=0
+   ```
