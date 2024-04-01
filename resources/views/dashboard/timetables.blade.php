@@ -1,4 +1,4 @@
-@if (Auth::user()->accesslevel == 100)
+@if (Auth::user()->accesslevel == 100 || Auth::user()->accesslevel == 5)
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
             @if (count($timetables))

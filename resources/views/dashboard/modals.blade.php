@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             
-            @if (Auth::user()->accesslevel == 100)
+            @if (Auth::user()->accesslevel == 100 || Auth::user()->accesslevel == 5)
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">x</span>

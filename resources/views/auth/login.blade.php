@@ -110,7 +110,7 @@
                         {{-- <form action="{{ route('web.find') }}" method="GET"> --}}
                         <form action="{{ route('web.find') }}" method="GET">
                             <div class="form-group">
-                                <label for="">Enter keyword</label>
+                                <label for="">Enter School Year</label>
                                 <input type="text" class="form-control" name="query" placeholder="Search here....."
                                     value="{{ request()->input('query') }}">
                                 <span class="text-danger">

@@ -39,10 +39,6 @@
                     <a href="/rooms"><span class="fa fa-home"></span><span class="text">Room</span></a>
                 </li>
 
-                <li class="menu-link {{ ($page == 'section') ? 'active' : '' }}">
-                    <a href="/section"><span class="fa fa-home"></span><span class="text">Section</span></a>
-                </li>
-
                 <li class="menu-link {{ ($page == 'my_account') ? 'active' : '' }}">
                     <a href="/my_account"><span class="fa fa-user"></span><span class="text">My Account</span></a>
                 </li>
