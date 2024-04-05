@@ -60,8 +60,8 @@ class RoomsController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|unique:rooms,name',
-            'capacity' => 'required|numeric'
+            'name' => 'required|max:30|unique:rooms,name',
+            'capacity' => 'required|numeric|gt:0'
         ];
 
         $messages = [
@@ -105,7 +105,7 @@ class RoomsController extends Controller
     public function update($id, Request $request)
     {
         $rules = [
-            'name' => 'required|unique:rooms,name,' . $id,
+            'name' => 'required|max:10|unique:rooms,name,' . $id,
             'capacity' => 'required|numeric'
         ];
 

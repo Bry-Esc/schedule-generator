@@ -106,7 +106,8 @@ class CoursesController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'course_code' => 'required|unique:courses,course_code,' . $id
+            'course_code' => 'required|unique:courses,course_code,' . $id,
+            'units' => 'required|numeric',
         ];
 
         $messages = [

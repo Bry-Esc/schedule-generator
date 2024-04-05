@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Timeslot;
 use App\Models\Professor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\UnavailableTimeslot;
 use App\Services\ProfessorsService;
 use Illuminate\Support\Facades\Log;
@@ -72,7 +73,7 @@ class ProfessorsController extends Controller
         // Log::debug('Employment Status:', $request->employment_status); // Log specifically
 
         $rules = [
-            'name' => 'required',
+            'name' => 'required|unique:professors',
             'department' => 'required',
             'employment_status' => 'required'
         ];
@@ -124,14 +125,22 @@ class ProfessorsController extends Controller
         }
 
         $rules = [
-            'name' => 'required',
+            'name' => ['required', Rule::unique('professors')->ignore($professor->id)],
+            'department' => 'required',
+            'employment_status' => 'required',
+        ];
+
+        $messages = [
+            'name.unique' => 'This Professor already exists',
+            'department.required' => 'Select a Department',
+            'employment_status.required' => 'Select an Employment Status',
         ];
 
         if ($request->has('email') && $request->email) {
             $rules['email'] = 'email';
         }
 
-        $this->validate($request, $rules);
+        $this->validate($request, $rules, $messages);
 
         $professor = $this->service->update($id, $request->all());
 

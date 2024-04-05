@@ -9,6 +9,7 @@
                         <th style="width: 26%">Courses Taught</th>
                         <th style="width: 20%">Employee Status</th>
                         <th style="width: 20%">Available Periods</th>
+                        {{-- <th style="width: 20%">Unavailable Periods</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -67,6 +68,17 @@
                                 <p>No unavailable periods</p>
                             @endif --}}
                         </td>
+                        {{-- <td>
+                            @if (count($professor->unavailable_timeslots))
+                                <ul>
+                                    @foreach ($professor->unavailable_timeslots as $period)
+                                        <li>{{ $period->day->name}}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>No unavailable periods</p>
+                            @endif
+                        </td> --}}
                         <td>
                             <button class="btn btn-primary btn-sm resource-update-btn" data-id="{{ $professor->id }}"><i class="fa fa-pencil"></i></button>
                             <button class="btn btn-danger btn-sm resource-delete-btn" data-id="{{ $professor->id }}"><i class="fa fa-trash-o"></i></button>

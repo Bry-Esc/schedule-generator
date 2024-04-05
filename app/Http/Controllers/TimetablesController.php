@@ -7,6 +7,7 @@ use App\Services\TimetableService;
 use App\Events\TimetablesRequested;
 
 use App\Models\Day;
+use App\Models\Section;
 use App\Models\Timetable;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +98,26 @@ class TimetablesController extends Controller
 
         event(new TimetablesRequested($timetable));
 
-        return response()->json(['message' => 'Timetables are being generated.Check back later'], 200);
+        return response()->json(['message' => 'Timetables are being generated. Check back later'], 200);
+    }
+
+    /**
+     * Remove the specified timetable from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $timetable = Timetable::find($id);
+
+        if (!$timetable) {
+            return redirect('/')->with('error', 'Timetable not found');
+        }
+
+        $timetable->delete();
+
+        return response()->json(['message' => 'Schedule Deleted'], 200);
     }
 
     /**
@@ -121,14 +141,14 @@ class TimetablesController extends Controller
 
     public function render($id)
     {
-        $timetable = Timetable::find($id);
+        $sectionSchedule = Section::find($id);
 
-        if (!$timetable) {
+        if (!$sectionSchedule) {
             return redirect('/');
         } else {
-            $path = $timetable->file_url;
-            $timetableData =  Storage::get($path);
-            $timetableName = $timetable->name;
+            $path = $sectionSchedule->file_url;
+            $timetableData = Storage::get($path);
+            $timetableName = $sectionSchedule->name;
             return view('timetables.render', compact('timetableData', 'timetableName'));
         }
     }

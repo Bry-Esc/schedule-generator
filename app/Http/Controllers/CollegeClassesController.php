@@ -53,7 +53,7 @@ class CollegeClassesController extends Controller
             return view('classes.table', compact('classes', 'academicPeriods'));
         }
 
-        return view('classes.index', compact('classes', 'rooms', 'courses', 'academicPeriods'));
+        return view('classes.index', compact('classes', 'rooms', 'courses', 'academicPeriods', 'professors'));
     }
 
     /**
@@ -67,11 +67,17 @@ class CollegeClassesController extends Controller
         // 1. Validation Rules
         $rules = [
             'name' => 'required|unique:classes',
-            'size' => 'required'
+            'size' => 'required',
         ];
+
+        $data['unavailable_rooms'] = $request->has('unavailable_rooms') ? $request->input('unavailable_rooms') : null;
 
         // 2. Validate Input
         $this->validate($request, $rules);
+
+        // 3. Prepare Data
+        $data = $request->all();
+        $data['unavailable_rooms'] = $request->input('unavailable_rooms', null);
 
         // 3. Store Data (using a service)
         $class = $this->service->store($request->all());

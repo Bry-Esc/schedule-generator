@@ -23,6 +23,14 @@
                     <a href="/dashboard"><span class="fa fa-dashboard"></span><span class="text">Dashboard</span></a>
                 </li>
 
+                <li class="menu-link {{ ($page == 'courses') ? 'active' : '' }}">
+                    <a href="/courses"><span class="fa fa-book"></span><span class="text">Subjects</a>
+                </li>
+
+                <li class="menu-link {{ ($page == 'classes') ? 'active' : '' }}">
+                    <a href="/classes"><span class="fa fa-users"></span><span class="text">Curriculum</a>
+                </li>
+
                 <li class="menu-link {{ ($page == 'professors') ? 'active' : '' }}">
                     <a href="/professors"><span class="fa fa-graduation-cap"></span><span class="text">Professors Schedule</span></a>
                 </li>

@@ -44,6 +44,7 @@ Route::post('timetables', 'TimetablesController@store');
 Route::get('timetables', 'TimetablesController@index');
 Route::get('timetables/view/{id}', 'TimetablesController@view');
 Route::get('timetables/render/{id}', 'TimetablesController@render');
+Route::resource('timetables', 'TimetablesController');
 
 // User account activation routes
 Route::get('/users/activate', 'UsersController@showActivationPage');

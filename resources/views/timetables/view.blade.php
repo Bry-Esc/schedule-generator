@@ -39,21 +39,25 @@
 
             .course_code {
                 font-weight: bold;
-                font-size: 1.5em;
+                font-size: 1.6rem;
+            }
+
+            .course_name {
+                font-size: 1.2rem;
             }
 
             .room {
                 float: left;
                 margin-top: 20px;
                 margin-bottom: 10px;
-                font-size: 0.8em;
+                font-size: 1.4rem;
             }
 
             .professor {
                 float: right;
                 margin-top: 20px;
                 margin-bottom: 10px;
-                font-size: 0.8em;
+                font-size: 1.4rem;
             }
 
             @media all {

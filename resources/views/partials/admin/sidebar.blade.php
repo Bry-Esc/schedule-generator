@@ -31,7 +31,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/courses"><span class="fa fa-book"></span><span class="text">Acad Period</a></li>
                         <li><a href="/classes"><span class="fa fa-users"></span><span class="text">Curriculum</a></li>
-                        <li><a href="/timeslots"><span class="fa fa-clock-o"></span><span class="text">Periods</a></li>
+                        <li><a href="/timeslots"><span class="fa fa-clock-o"></span><span class="text">Time Periods</a></li>
                         <li class="menu-link {{ ($page == 'rooms') ? 'active' : '' }}">
                             <a href="/rooms"><span class="fa fa-home"></span><span class="text">Room</span></a>
                         </li>

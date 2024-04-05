@@ -22,13 +22,13 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Room</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Capacity</label>
-                                <input type="number" name="capacity" class="form-control">
+                                <input type="number" name="capacity" class="form-control" step="1.0" min="0" max="50">
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,8 @@ Professor.prototype.prepareForUpdate = function (resource) {
   console.log(resource);
   $("input[name=name]").val(resource.name);
   $("input[name=email]").val(resource.email);
+  $("#department-select").val(resource.department).change();
+  $("#employment-status-select").val(resource.employment_status).change();
   $("#courses-select").val(resource.course_ids).change();
   $("#periods-select").val(resource.periods).change();
 };

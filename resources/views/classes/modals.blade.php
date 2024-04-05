@@ -63,9 +63,8 @@
 
                                 <div class="select2-wrapper">
                                     <select id="rooms-select" name="room_ids[]" class="form-control select2" multiple>
-                                        <option value="">Select rooms</option>
                                         @foreach ($rooms as $room)
-                                         <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                            <option value="{{ $room->id }}" selected>{{ $room->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -97,7 +96,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="select2-wrapper">
                 <select class="form-control course-select" name="course-{ID}">
-                    <option value="" selected>Select a course</option>
+                    <option value="">Select subject</option>
                     @foreach ($courses as $course)
                     <option value="{{ $course->id }}">{{ $course->name }}</option>
                     @endforeach
@@ -117,7 +116,7 @@
         </div>
 
         <div class="col-md-3 col-sm-4 col-xs-10">
-            <input type="number" class="form-control course-meetings" name="course-{ID}-meetings">
+            <input type="number" class="form-control course-meetings" name="course-{ID}-meetings" step="1.0" min="0" max="2">
         </div>
         
         {{-- <div class="col-md-3 col-sm-4 col-xs-10">

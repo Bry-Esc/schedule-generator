@@ -47,11 +47,19 @@ class CollegeClassesService extends AbstractService
     {
         $class = CollegeClass::create([
             'name' => $data['name'],
-            'size' => $data['size']
+            'size' => $data['size'],
         ]);
 
         if (!$class) {
             return null;
+        }
+        
+        if (!isset($data['unavailable_rooms'])) {
+            $data['unavailable_rooms'] = [];
+        }
+
+        if (!isset($data['courses'])) {
+            $data['courses'] = [];
         }
 
         $class->unavailable_rooms()->sync($data['unavailable_rooms']);

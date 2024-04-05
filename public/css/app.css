@@ -250,6 +250,19 @@ tbody tr:nth-of-type(odd) {
   background-color: rgba(229, 76, 16, 0.1);
 }
 
+/* Schedule Font  */
+.status-completed {
+  color: green;
+}
+
+.status-in-progress {
+  color: red;
+}
+
+.status-unknown {
+  color: black;
+}
+
 /** Redefinition for buttons */
 .btn-primary {
   background: #5f9ea0;

@@ -22,9 +22,19 @@ My Account
                     {!! csrf_field() !!}
                     @include('errors.form_errors')
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Email</label>
                         <input type="text" class="form-control" placeholder="Email" name="email" value="{{ $user->email }}">
+                    </div> --}}
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Email" name="email" value="{{ $user->email }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Confirm Email</label>
+                        <input type="email" class="form-control" placeholder="Confirm Email" name="email_confirmation" required>
                     </div>
 
                     <div class="form-group">

@@ -151,7 +151,8 @@ class TimetableGA
     public function run()
     {
         try {
-            $maxGenerations = 1500;
+            // $maxGenerations = 1500;
+            $maxGenerations = 1;
 
             $timetable = $this->initializeTimetable();
 

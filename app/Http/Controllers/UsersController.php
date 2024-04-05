@@ -20,7 +20,7 @@ use App\Services\ProfessorsService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Events\PasswordResetRequested;
-
+use App\Models\Section;
 
 class UsersController extends Controller
 {
@@ -253,8 +253,8 @@ class UsersController extends Controller
         $user = Auth::user();
 
         $rules = [
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'name' => 'required',
+            'email' => 'required|confirmed|max:30|email|unique:users,email,' . $user->id,
+            'name' => 'required|max:30',
             'security_question_id' => 'required',
             'security_question_answer' => 'required'
         ];
@@ -309,12 +309,15 @@ class UsersController extends Controller
 
         $search_text = $request->input('query');
         
-        $timetables = Timetable::where('name', 'like', '%' . $search_text . '%')->get();
+        // $timetables = Timetable::where('name', 'like', '%' . $search_text . '%')->get();
+        $sectionSchedules = Section::where('name', 'like', '%' . $search_text . '%')->get();
 
         // if ($request->ajax()) {
         //     return view('professors.table', compact('professors'));
         // }
 
-        return view('auth/login', compact('timetables'));
+        // $timetables = Timetable::all();
+
+        return view('auth/login', compact('sectionSchedules'));
     }
 }

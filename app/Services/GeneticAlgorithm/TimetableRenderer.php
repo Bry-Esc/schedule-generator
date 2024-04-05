@@ -2,14 +2,15 @@
 
 namespace App\Services\GeneticAlgorithm;
 
-use Storage;
-
 use App\Models\Day as DayModel;
 use App\Models\Room as RoomModel;
 use App\Models\Course as CourseModel;
 use App\Models\Timeslot as TimeslotModel;
 use App\Models\CollegeClass as CollegeClassModel;
 use App\Models\Professor as ProfessorModel;
+use App\Models\Section;
+use App\Models\Timetable;
+use Illuminate\Support\Facades\Storage;
 
 class TimetableRenderer
 {
@@ -18,9 +19,14 @@ class TimetableRenderer
      *
      * @param App\Models\Timetable Timetable whose data we are rendering
      */
+
+    private $timetable;
+    // private $section;
+
     public function __construct($timetable)
     {
         $this->timetable = $timetable;
+        // $this->section = $section;
     }
 
     /**
@@ -46,17 +52,19 @@ class TimetableRenderer
         $classes = CollegeClassModel::all();
 
         // Define the template for the timetable
-        $tableTemplate = '<h3 class="text-center">{TITLE}</h3>
-                        <div style="page-break-after: always">
-                            <table class="table table-bordered">
-                                <thead>
-                                    {HEADING}
-                                </thead>
-                                <tbody>
-                                    {BODY}
-                                </tbody>
-                            </table>
-                        </div>';
+        $tableTemplate = '<div class="{TITLE}">
+    <h3 class="text-center">{TITLE}</h3>
+    <div style="page-break-after: always">
+        <table class="table table-bordered">
+            <thead>
+                {HEADING}
+            </thead>
+            <tbody>
+                {BODY}
+            </tbody>
+        </table>
+    </div>
+</div>';
 
         $content = "";
 
@@ -90,6 +98,7 @@ class TimetableRenderer
 
                         // Add the course code, room, and professor to the cell
                         $body .= "<span class='course_code'>{$courseCode}</span><br />";
+                        $body .= "<span class='course_name'>{$courseName}</span><br />";
                         $body .= "<span class='room pull-left'>{$room}</span>";
                         $body .= "<span class='professor pull-right'>{$professor}</span>";
 
@@ -100,11 +109,59 @@ class TimetableRenderer
                     }
                 }
                 $body .= "</tr>";
+
+                // Build the sector header row
+                // $sHeader = "<tr class='table-head'>";
+                // $sHeader .= "<td>Timeslots</td>";
+
+                // foreach ($days as $day) {
+                //     $sHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+                // }
+
+                // $sHeader .= "</tr>";
+
+                // $sBody = "<tr><td>" . $timeslot->time . "</td>";
+                
+                // // Loop through each day
+                // foreach ($days as $day) {
+                //     // Check if there is data for this timeslot
+                //     if (isset($data[$class->id][$day->name][$timeslot->time])) {
+                //         $sBody .= "<td class='text-center'>";
+                //         $slotData = $data[$class->id][$day->name][$timeslot->time];
+                //         $courseCode = $slotData['course_code'];
+                //         $courseName = $slotData['course_name'];
+                //         $professor = $slotData['professor'];
+                //         $room = $slotData['room'];
+
+                //         // Add the course code, room, and professor to the cell
+                //         $sBody .= "<span class='course_code'>{$courseCode}</span><br />";
+                //         $sBody .= "<span class='course_name'>{$courseName}</span><br />";
+                //         $sBody .= "<span class='room pull-left'>{$room}</span>";
+                //         $sBody .= "<span class='professor pull-right'>{$professor}</span>";
+
+                //         $sBody .= "</td>";
+                //     } else {
+                //         // If there is no data for this timeslot, add an empty cell
+                //         $sBody .= "<td></td>";
+                //     }
+                // }
+                // $sBody .= "</tr>";
+
+                // $title = $class->name;
+                // $sContent = str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $sHeader, $sBody], $tableTemplate);
+                // $sPath = 'public/sections/' . $title . '.html';
+                
+                // Storage::put($sPath, $sContent);
             }
 
             // Replace the placeholders in the template with the actual data
             $title = $class->name;
             $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+
+            // $this->section->update([
+            //     'name' => $title,
+            //     'file_url' => $path
+            // ]);
         }
 
         // Save the generated timetable to a file

@@ -104,13 +104,13 @@
                 <div class="row">
                     <div class="col-md-8" style="margin-top:50px" >
                         <center>
-                            <h4><p class="fw-semibold">Search for Students Schedule</p></h4>
+                            <h4><p class="fw-semibold">Search for Class Schedule</p></h4>
                             <hr>
                         </center>
                         {{-- <form action="{{ route('web.find') }}" method="GET"> --}}
                         <form action="{{ route('web.find') }}" method="GET">
                             <div class="form-group">
-                                <label for="">Enter School Year</label>
+                                <label for="">Enter Section</label>
                                 <input type="text" class="form-control" name="query" placeholder="Search here....."
                                     value="{{ request()->input('query') }}">
                                 <span class="text-danger">
@@ -123,7 +123,7 @@
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
 
-                            @if(isset($timetables))
+                            @if(isset($sectionSchedules))
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -133,14 +133,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($timetables) > 0)
-                                            @foreach($timetables as $timetable)
+                                        @if(count($sectionSchedules) > 0)
+                                            @foreach($sectionSchedules as $sectionSchedule)
                                                 <tr>
-                                                    <td>{{ $timetable->name }}</td>
+                                                    <td>{{ $sectionSchedule->name }}</td>
                                                     <td>
-                                                        @if($timetable->file_url)
-                                                            <a class="btn-view btn btn-sm btn-primary"
-                                                            data-id="{{ $timetable->id }}"><i class="fa fa-eye" aria-hidden="true"></i></span> View</a>
+                                                        @if($sectionSchedule->file_url)
+                                                            <a class="btn-view btn btn-sm btn-primary" data-id="{{ $sectionSchedule->id }}">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i> View
+                                                            </a>
                                                         @else
                                                             N/A
                                                         @endif

@@ -31,15 +31,21 @@
                                 <label>Department</label>
                                 <div class="select2-wrapper">
                                     <select id="department-select" name="department" class="form-control select2">
-                                        <option value="">Select Department</option>
+                                        <option value="" selected>Select Department</option>
                                         <option value="COI">COI</option>
-                                        <option value="COE">COE</option>
+                                        <option value="CET">CET</option>
+                                        <option value="CBAA">CBAA</option>
+                                        <option value="CAS">CAS</option>
+                                        <option value="CRIM">CRIM</option>
+                                        <option value="CHTM">CHTM</option>
+                                        <option value="CNHS">CNHS</option>
+                                        <option value="CED">CED</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Courses</label>
+                                <label>Subject Title</label>
                                 <div class="select2-wrapper">
                                     <select id="courses-select" name="course_ids[]" class="form-control select2" multiple>
                                         <option value="">Select courses</option>
@@ -55,7 +61,7 @@
                                 <label>Employee Status</label>
                                 <div class="select2-wrapper">
                                     <select id="employment-status-select" name="employment_status" class="form-control select2">
-                                        <option value="">Select Status</option>
+                                        <option value="" selected>Select Status</option>
                                         <option value="Full Time">Full Time</option>
                                         <option value="Part Time">Part Time</option>
                                     </select>

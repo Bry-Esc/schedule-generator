@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <label>Units</label>
-                                <input type="number" name="units" class="form-control" step="1.0">
+                                <input type="number" name="units" class="form-control" step="1.0" min="0" max="6">
                             </div>
 
                             <div class="form-group">
