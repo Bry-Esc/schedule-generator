@@ -35,6 +35,10 @@
                     <a href="/professors"><span class="fa fa-graduation-cap"></span><span class="text">Professors Schedule</span></a>
                 </li>
 
+                <li class="menu-link {{ ($page == 'prof_sched') ? 'active' : '' }}">
+                    <a href="/prof_sched"><a href="/prof_sched"><i class="fa fa-calendar" aria-hidden="true"></i><span class="text">View Professor Schedule</span></a>
+                </li>
+
                 <li class="menu-link {{ ($page == 'classes') ? 'active' : '' }}">
                     <a href="/classes"><span class="fa fa-users"></span><span class="text">Curriculum</a>
                 </li>

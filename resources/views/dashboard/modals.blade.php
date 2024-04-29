@@ -25,8 +25,13 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>Schedule Name</label>
-                                <input type="text" name="name" class="form-control">
+                                <label>School Year</label>
+                                <select name="name" class="form-control">
+                                    <option value="" selected>Select School Year</option>
+                                    @for ($year = date('Y'); $year >= date('Y') - 5; $year--)
+                                        <option value="{{ $year . '-' . ($year + 1) }}">{{ $year . '-' . ($year + 1) }}</option>
+                                    @endfor
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -44,14 +49,22 @@
                             <div class="form-group">
                                 <label>Select Days</label>
 
-                                @foreach ($days as $day)
-                                    @if($day->name != 'Sunday')
-                                        <div class="form-group">
-                                            <input name="day_{{ $day->id }}" type="checkbox" for="day_{{ $day->id }}" @if($day->id <= 5) checked @endif>
-                                            <label id="day_{{ $day->id }}">{{ $day->name }}</label>
-                                        </div>
-                                    @endif
-                                @endforeach
+                                <div name="days">
+                                    <div class="form-group">
+                                        <input id="MTh" type="checkbox" name="MTh">
+                                        <label for="MTh">MTh</label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <input id="TF" type="checkbox" name="TF">
+                                        <label for="TF">TF</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input id="WS" type="checkbox" name="WS">
+                                        <label for="WS">WS</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

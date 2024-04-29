@@ -1,8 +1,9 @@
 <?php
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\SearchController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ProfessorsSchedulesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,12 @@ Route::resource('timeslots', 'TimeslotsController');
 
 // Routes for professors module
 Route::resource('professors', 'ProfessorsController');
+
+// Routes for View Professor Schedule module
+Route::get('/findProfSched',[ProfessorsSchedulesController::class, 'find'])->name('web.findProfSched');
+Route::resource('prof_sched', 'ProfessorsSchedulesController');
+Route::get('timetables/renderProfSched/{id}', 'TimetablesController@renderProfSched');
+
 
 // Routes for curriculum
 Route::resource('classes', 'CollegeClassesController');

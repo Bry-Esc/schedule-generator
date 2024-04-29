@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+
 use Response;
 use App\Models\Day;
 use App\Models\Course;
-
+use App\Models\ProfessorSched;
 use App\Models\Timeslot;
-use App\Models\Professor;
+
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\UnavailableTimeslot;
 use App\Services\ProfessorsService;
 use Illuminate\Support\Facades\Log;
 
-class ProfessorsController extends Controller
+class ProfessorsSchedulesController extends Controller
 {
-    /**
-     * Service class for handling operations relating to this
-     * controller
-     *
-     * @var App\Services\ProfessorsService $service
-     */
-    protected $service;
-
-    /**
-     * Create a new instance of this controller
-     *
-     * @param App\Services\ProfessorsService $service This controller's service class
-     */
+    
     public function __construct(ProfessorsService $service)
     {
         $this->service = $service;
@@ -43,22 +33,23 @@ class ProfessorsController extends Controller
      */
     public function index(Request $request)
     {
-        $professors = $this->service->all([
-            'keyword' => $request->has('keyword') ? $request->keyword : null,
-            'order_by' => 'name',
-            'paginate' => 'true',
-            'per_page' => 20
-        ]);
+        // $professors = $this->service->all([
+        //     'keyword' => 'nonexistent_keyword',
+        //     'order_by' => 'name',
+        //     'paginate' => 'true',
+        //     'per_page' => 20
+        // ]);
 
         $courses = Course::all();
         $days = Day::all();
         $timeslots = Timeslot::all();
 
         if ($request->ajax()) {
-            return view('professors.table', compact('professors'));
+            return view('prof_sched.table', compact('professors'));
         }
 
-        return view('professors.index', compact('professors', 'courses', 'days', 'timeslots'));
+        // return view('prof_sched.index', compact('professors', 'courses', 'days', 'timeslots'));
+        return view('prof_sched.index');
     }
 
     /**
@@ -168,8 +159,22 @@ class ProfessorsController extends Controller
         }
     }
 
-    public function showProfSched()
-    {
-        return view('prof_sched.table');
+    public function find(Request $request) {
+        $request->validate([
+            'query' => 'required'
+        ]);
+
+        $search_text = $request->input('query');
+        
+        // $timetables = Timetable::where('name', 'like', '%' . $search_text . '%')->get();
+        $professor_scheds = ProfessorSched::where('name', 'like', $search_text . '%')->get();
+
+        // if ($request->ajax()) {
+        //     return view('professors.table', compact('professors'));
+        // }
+
+        // $timetables = Timetable::all();
+
+        return view('prof_sched.index', compact('professor_scheds'));
     }
 }

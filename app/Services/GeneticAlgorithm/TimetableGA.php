@@ -152,7 +152,7 @@ class TimetableGA
     {
         try {
             // $maxGenerations = 1500;
-            $maxGenerations = 1;
+            $maxGenerations = 0;
 
             $timetable = $this->initializeTimetable();
 

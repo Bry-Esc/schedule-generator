@@ -8,9 +8,8 @@ use App\Models\Course as CourseModel;
 use App\Models\Timeslot as TimeslotModel;
 use App\Models\CollegeClass as CollegeClassModel;
 use App\Models\Professor as ProfessorModel;
-use App\Models\Section;
-use App\Models\Timetable;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Professor;
 
 class TimetableRenderer
 {
@@ -21,12 +20,10 @@ class TimetableRenderer
      */
 
     private $timetable;
-    // private $section;
 
     public function __construct($timetable)
     {
         $this->timetable = $timetable;
-        // $this->section = $section;
     }
 
     /**
@@ -67,6 +64,8 @@ class TimetableRenderer
 </div>';
 
         $content = "";
+        
+        $psContent = "";
 
         // Loop through each class
         foreach ($classes as $class) {
@@ -109,71 +108,70 @@ class TimetableRenderer
                     }
                 }
                 $body .= "</tr>";
+            }
+            
+            // Build the section header row
+            $sHeader = "<tr class='table-head'>";
+            $sHeader .= "<td>Timeslots</td>";
 
-                // Build the sector header row
-                // $sHeader = "<tr class='table-head'>";
-                // $sHeader .= "<td>Timeslots</td>";
+            foreach ($days as $day) {
+                $sHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
+            }
 
-                // foreach ($days as $day) {
-                //     $sHeader .= "\t<td>" . strtoupper($day->short_name) . "</td>";
-                // }
+            $sHeader .= "</tr>";
 
-                // $sHeader .= "</tr>";
+            $sBody = "";
 
-                // $sBody = "<tr><td>" . $timeslot->time . "</td>";
+            // Build the section row
+            foreach ($timeslots as $timeslot) {
+                $sContent = "";
+                $sBody .= "<tr><td>" . $timeslot->time . "</td>";
+                // Loop through each day
+                foreach ($days as $day) {
+                    // Check if there is data for this timeslot
+                    if (isset($data[$class->id][$day->name][$timeslot->time])) {
+                        $sBody .= "<td class='text-center'>";
+                        $slotData = $data[$class->id][$day->name][$timeslot->time];
+                        $courseCode = $slotData['course_code'];
+                        $courseName = $slotData['course_name'];
+                        $professor = $slotData['professor'];
+                        $room = $slotData['room'];
+
+                        // Add the course code, room, and professor to the cell
+                        $sBody .= "<span class='course_code'>{$courseCode}</span><br />";
+                        $sBody .= "<span class='course_name'>{$courseName}</span><br />";
+                        $sBody .= "<span class='room pull-left'>{$room}</span>";
+                        $sBody .= "<span class='professor pull-right'>{$professor}</span>";
+
+                        $sBody .= "</td>";
+                    } else {
+                        // If there is no data for this timeslot, add an empty cell
+                        $sBody .= "<td></td>";
+                    }
+                }
+                $sBody .= "</tr>";
+
+                $title = $class->name;
+                $sContent .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
+                $sPath = 'public/sections/' . $title . '.html';
                 
-                // // Loop through each day
-                // foreach ($days as $day) {
-                //     // Check if there is data for this timeslot
-                //     if (isset($data[$class->id][$day->name][$timeslot->time])) {
-                //         $sBody .= "<td class='text-center'>";
-                //         $slotData = $data[$class->id][$day->name][$timeslot->time];
-                //         $courseCode = $slotData['course_code'];
-                //         $courseName = $slotData['course_name'];
-                //         $professor = $slotData['professor'];
-                //         $room = $slotData['room'];
-
-                //         // Add the course code, room, and professor to the cell
-                //         $sBody .= "<span class='course_code'>{$courseCode}</span><br />";
-                //         $sBody .= "<span class='course_name'>{$courseName}</span><br />";
-                //         $sBody .= "<span class='room pull-left'>{$room}</span>";
-                //         $sBody .= "<span class='professor pull-right'>{$professor}</span>";
-
-                //         $sBody .= "</td>";
-                //     } else {
-                //         // If there is no data for this timeslot, add an empty cell
-                //         $sBody .= "<td></td>";
-                //     }
-                // }
-                // $sBody .= "</tr>";
-
-                // $title = $class->name;
-                // $sContent = str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $sHeader, $sBody], $tableTemplate);
-                // $sPath = 'public/sections/' . $title . '.html';
-                
-                // Storage::put($sPath, $sContent);
+                Storage::put($sPath, $sContent);
             }
 
             // Replace the placeholders in the template with the actual data
             $title = $class->name;
             $content .= str_replace(['{TITLE}', '{HEADING}', '{BODY}'], [$title, $header, $body], $tableTemplate);
 
-            // $this->section->update([
-            //     'name' => $title,
-            //     'file_url' => $path
-            // ]);
-        }
+            // Save the generated timetable to a file
+            $path = 'public/timetables/timetable_' . $this->timetable->id . '.html';
+            Storage::put($path, $content);
 
-        // Save the generated timetable to a file
-        $path = 'public/timetables/timetable_' . $this->timetable->id . '.html';
-        Storage::put($path, $content);
-
-        // Update the timetable's file URL
-        $this->timetable->update([
-            'file_url' => $path
-        ]);
+            // Update the timetable's file URL
+            $this->timetable->update([
+                'file_url' => $path
+            ]);
+        } 
     }
-
     /**
      * Get an associative array with data for constructing timetable
      *

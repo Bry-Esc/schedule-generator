@@ -310,7 +310,7 @@ class UsersController extends Controller
         $search_text = $request->input('query');
         
         // $timetables = Timetable::where('name', 'like', '%' . $search_text . '%')->get();
-        $sectionSchedules = Section::where('name', 'like', '%' . $search_text . '%')->get();
+        $sectionSchedules = Section::where('name', 'like', $search_text . '%')->get();
 
         // if ($request->ajax()) {
         //     return view('professors.table', compact('professors'));

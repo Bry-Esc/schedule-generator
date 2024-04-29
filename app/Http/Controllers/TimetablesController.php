@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Services\TimetableService;
-use App\Events\TimetablesRequested;
-
 use App\Models\Day;
 use App\Models\Section;
 use App\Models\Timetable;
+
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\ProfessorSched;
+use App\Services\TimetableService;
+use App\Events\TimetablesRequested;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,11 +52,14 @@ class TimetablesController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'academic_period_id' => 'required'
+            'academic_period_id' => 'required',
+            // 'days' => 'required'
         ];
 
         $messages = [
-            'academic_period_id.required' => 'An academic period must be selected'
+            'name.required' => 'A school year must be selected',
+            'academic_period_id.required' => 'An academic period must be selected',
+            'days.required' => 'At least one day must be selected'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -63,16 +67,43 @@ class TimetablesController extends Controller
         $errors = [];
         $dayIds = [];
 
-        $days = Day::all();
+        // $days = Day::all();
 
-        foreach ($days as $day) {
-            if ($request->has('day_' . $day->id)) {
-                $dayIds[] = $day->id;
-            }
+        // foreach ($days as $day) {
+        //     if ($request->has('day_' . $day->id)) {
+        //         $dayIds[] = $day->id;
+        //     }
+        // }
+        
+        // Check if MTh is selected
+        if ($request->has('MTh')) {
+            // Get the IDs of Monday and Thursday
+            $mthIds = Day::whereIn('name', ['Monday', 'Thursday'])->pluck('id')->toArray();
+
+            // Merge the MTh IDs with the existing day IDs
+            $dayIds = array_merge($dayIds, $mthIds);
+        }
+
+        // Check if TF is selected
+        if ($request->has('TF')) {
+            // Get the IDs of Tuesday and Friday
+            $tfIds = Day::whereIn('name', ['Tuesday', 'Friday'])->pluck('id')->toArray();
+
+            // Merge the TF IDs with the existing day IDs
+            $dayIds = array_merge($dayIds, $tfIds);
+        }
+
+        // Check if WS is selected
+        if ($request->has('WS')) {
+            // Get the IDs of Wednesday and Saturday
+            $wsIds = Day::whereIn('name', ['Wednesday', 'Saturday'])->pluck('id')->toArray();
+
+            // Merge the WS IDs with the existing day IDs
+            $dayIds = array_merge($dayIds, $wsIds);
         }
 
         if (!count($dayIds)) {
-            $errors[] = 'At least one day should be selected';
+            $errors[] = 'At least one day must be selected';
         }
 
         if (count($errors)) {
@@ -98,7 +129,7 @@ class TimetablesController extends Controller
 
         event(new TimetablesRequested($timetable));
 
-        return response()->json(['message' => 'Timetables are being generated. Check back later'], 200);
+        return response()->json(['message' => 'A schedule is being generated. Check back after 3 minutes'], 200);
     }
 
     /**
@@ -149,6 +180,20 @@ class TimetablesController extends Controller
             $path = $sectionSchedule->file_url;
             $timetableData = Storage::get($path);
             $timetableName = $sectionSchedule->name;
+            return view('timetables.render', compact('timetableData', 'timetableName'));
+        }
+    }
+
+    public function renderProfSched($id)
+    {
+        $profSched = ProfessorSched::find($id);
+
+        if (!$profSched) {
+            return redirect('/');
+        } else {
+            $path = $profSched->file_url;
+            $timetableData = Storage::get($path);
+            $timetableName = $profSched->name;
             return view('timetables.render', compact('timetableData', 'timetableName'));
         }
     }
